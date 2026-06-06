@@ -8,6 +8,7 @@ import {RouterLink} from "@angular/router";
 import {Carousel} from "../../layout/carousel/carousel";
 import { Room, RoomsService } from '../../service/rooms.service';
 import { CommonModule } from '@angular/common';
+import { MediaService } from '../../service/media.service';
 
 interface Slide {
   heading: string;
@@ -23,13 +24,17 @@ interface Slide {
 })
 export class Home implements OnInit{
 
-    rooms: Room[] = [];
+  aboutPhoto = '';
+  rooms: Room[] = [];
 
-  constructor(private roomsService: RoomsService) {}
+  constructor(private roomsService: RoomsService, private media: MediaService) {}
 
   ngOnInit(): void {
+    this.rooms = [];
+    this.aboutPhoto = this.media.photo('historyczne/Szkola_Podstawowa_nr_1_im_gen_Jozefa_Bema_ul_Wojska_Polskiego_Bystrzyca_Klodzka_107777-1927.jpg');
+
     this.roomsService.getRooms().subscribe((rooms) => {
-      this.rooms = rooms.slice(0, 3); // max 3 na preview
+      this.rooms = rooms.slice(0, 3);
     });
   }
 
