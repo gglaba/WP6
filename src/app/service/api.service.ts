@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 
 export interface ContactRequest {
@@ -20,7 +21,9 @@ export interface ContactRequest {
   providedIn: 'root',
 })
 export class ApiService {
-    private apiUrl = 'http://localhost:5247/biura-bystrzyca/mail';
+
+// api.service.ts
+private apiUrl = environment.apiUrl + '/biura-bystrzyca/mail';
 
   constructor(private http: HttpClient) {}
 
