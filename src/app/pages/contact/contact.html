@@ -1,0 +1,193 @@
+<div class="ct-wrap">
+
+  <div class="ct-eyebrow">kontakt</div>
+  <h1 class="ct-title">Skontaktuj się z nami</h1>
+
+  <div class="ct-grid">
+
+    <!-- formularz -->
+    <div class="ct-card">
+      <div class="ct-card-title">Wyślij wiadomość</div>
+
+      <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+        <div class="ct-field">
+          <label for="name">Imię i nazwisko</label>
+          <input id="name" type="text" name="name" [(ngModel)]="form.name"
+            placeholder="Jan Kowalski" required />
+        </div>
+<div class="ct-field">
+  <label for="email">Adres e-mail</label>
+  <input
+    id="email"
+    type="text"
+    name="email"
+    [(ngModel)]="form.email"
+    placeholder="jan@firma.pl"
+    required
+    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+    #emailField="ngModel"
+    (blur)="emailField.control.markAsTouched()"
+  />
+  <span class="ct-field-error" *ngIf="emailField.invalid && emailField.touched">
+    Podaj poprawny adres e-mail
+  </span>
+</div>
+<div class="ct-field">
+  <label>Numer telefonu <span class="ct-optional">opcjonalnie</span></label>
+<input type="tel" name="phone" [ngModel]="form.phone"
+  (ngModelChange)="form.phone = $event"
+  (input)="formatPhone($event)"
+  (focus)="onPhoneFocus($event)"
+  placeholder="+48 123 456 789" />
+</div>
+
+<div class="ct-field">
+  <label>Preferowana forma kontaktu zwrotnego</label>
+<div class="ct-checkboxes">
+  <label class="ct-checkbox-label">
+    <p-checkbox
+      [(ngModel)]="form.contactByEmail"
+      [binary]="true"
+      name="contactByEmail"
+    />
+    E-mail
+  </label>
+  <label class="ct-checkbox-label">
+    <p-checkbox
+      [(ngModel)]="form.contactByPhone"
+      [binary]="true"
+      name="contactByPhone"
+    />
+    Telefon
+  </label>
+    <div class="ct-warning" *ngIf="bothContactMethodsUnselected">
+      <i class="pi pi-exclamation-triangle"></i>
+        Wybierz przynajmniej jedną formę kontaktu zwrotnego.
+    </div>
+</div>
+</div>
+        <div class="ct-field">
+          <label for="subject">Temat</label>
+          <input id="subject" type="text" name="subject" [(ngModel)]="form.subject"
+            placeholder="Zapytanie o wynajem" required />
+        </div>
+        <div class="ct-field">
+        <label>Pomieszczenia</label>
+        <p-multiselect
+            [options]="roomOptions"
+            [(ngModel)]="form.selectedRooms"
+            name="rooms"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Wybierz pomieszczenia..."
+            display="chip"
+            [filter]="false"
+            [showClear]="true"
+            [showToggleAll]="false"
+            class="ct-multiselect"
+        />
+        </div>
+            <div class="ct-warning" *ngIf="hasUnavailableSelected">
+    <i class="pi pi-exclamation-triangle"></i>
+    Wybrano wynajęte pomieszczenia, które mogą być niedostępne długoterminowo - mimo to możesz wysłać zapytanie, a my skontaktujemy się z Tobą, aby omówić szczegóły.
+    </div>
+        <div class="ct-field">
+          <label for="message">Wiadomość</label>
+          <textarea id="message" name="message" [(ngModel)]="form.message"
+            rows="5" placeholder="Treść wiadomości..." required></textarea>
+        </div>
+
+        <!-- <div *ngIf="submitted" class="ct-success">
+          <i class="pi pi-check-circle"></i> Wiadomość wysłana — odezwiemy się wkrótce.
+        </div> -->
+        <input
+  type="text"
+  name="website"
+  [(ngModel)]="form.website"
+  autocomplete="off"
+  tabindex="-1"
+  aria-hidden="true"
+  style="position:absolute; left:-9999px; opacity:0; height:0; width:0;"
+/>
+<div class="ct-rodo">
+  <p-checkbox [(ngModel)]="form.rodoConsent" [binary]="true" name="rodo" />
+  <span>
+    Wyrażam zgodę na przetwarzanie danych osobowych zgodnie z
+    <a routerLink="/privacy-policy" class="ct-rodo-link">polityką prywatności</a>
+  </span>
+</div>
+    <div class="ct-warning" *ngIf="!form.rodoConsent">
+      <i class="pi pi-exclamation-triangle"></i>
+        Aby wysłać wiadomość, musisz wyrazić zgodę na przetwarzanie danych osobowych.
+    </div>
+<button class="ct-btn" type="submit" [disabled]="contactForm.invalid || !form.rodoConsent">
+          <span *ngIf="!isLoading">
+    <i class="pi pi-send"></i> Wyślij wiadomość
+  </span>
+  <span *ngIf="isLoading" class="ct-btn-loading">
+    <i class="pi pi-spin pi-spinner"></i> Wysyłanie...
+  </span>
+        </button>
+      </form>
+    </div>
+    <p-toast position="bottom-center" />
+
+    <!-- prawa kolumna -->
+    <div class="ct-right">
+
+      <!-- mapa -->
+      <div class="ct-map">
+        <iframe 
+        *ngIf="cookieService.has('thirdParty')"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d927.4938886989428!2d16.651006017736698!3d50.2981410932572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470e05cad6a1e23f%3A0x8523d870c09cac46!2sLokale%20do%20wynaj%C4%99cia!5e0!3m2!1spl!2spl!4v1779532550328!5m2!1spl!2spl"
+          width="100%"
+          height="100%"
+          style="border: 0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Lokalizacja WP6"
+        ></iframe>
+          <div *ngIf="!cookieService.has('thirdParty')" class="ct-map-blocked">
+    <i class="pi pi-map-marker"></i>
+    <p>Mapa wymaga zgody na cookies zewnętrznych.</p>
+    <button class="ct-btn-sm" (click)="cookieService.acceptAll()">
+      Zaakceptuj i pokaż mapę
+    </button>
+  </div>
+</div>
+
+      <!-- dane firmy -->
+      <div class="ct-info">
+        <div class="ct-info-title">Dane firmy </div>
+        <div class="ct-info-name">Zakład Kosmetyczno-Fryzjerski Bogdan Głąba</div>
+        <div class="ct-info-nip">NIP: 881-106-05-37</div>
+
+        <div class="ct-contacts">
+          <div class="ct-contact-row">
+            <div class="ct-contact-icon"><i class="pi pi-map-marker"></i></div>
+            <div>
+              <div>ul. Stefana Okrzei 1</div>
+              <div class="ct-contact-label">57-500 Bystrzyca Kłodzka</div>
+            </div>
+          </div>
+          <div class="ct-contact-row">
+            <div class="ct-contact-icon"><i class="pi pi-phone"></i></div>
+            <div>
+              <div>+48 514 270 784</div>
+              <div class="ct-contact-label">Pn–Pt, 9:00–17:00</div>
+            </div>
+          </div>
+          <div class="ct-contact-row">
+            <div class="ct-contact-icon"><i class="pi pi-envelope"></i></div>
+            <div>
+              <div>biura.bystrzyca@gmail.com</div>
+              <div class="ct-contact-label">Odpowiadamy w ciągu 24h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

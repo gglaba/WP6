@@ -1,0 +1,108 @@
+<app-carousel />
+
+<section class="hs-section">
+  <div class="hs-wrap">
+
+    <div class="hs-header">
+      <div class="hs-header-text">
+        <span class="hs-eyebrow">oferta</span>
+        <h2 class="hs-title">Dostępne pomieszczenia</h2>
+        <p class="hs-subtitle">
+          Lokale użytkowe w zabytkowej willi w centrum Bystrzycy Kłodzkiej.
+        </p>
+      </div>
+      <a routerLink="/rooms" class="hs-link-btn">
+        Zobacz wszystkie <i class="pi pi-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="hs-rooms-grid">
+      <div *ngFor="let room of rooms" class="hs-room-card" [routerLink]="['/rooms', room.id]">
+        <div class="hs-room-img">
+          <img
+            *ngIf="room.photosUrls.length"
+            [src]="room.photosUrls[0]"
+            [alt]="room.name"
+          />
+          <i *ngIf="!room.photosUrls.length" class="pi pi-building"></i>
+          <span class="hs-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
+            {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
+          </span>
+        </div>
+        <div class="hs-room-body">
+          <div class="hs-room-name">{{ room.name }}</div>
+          <div class="hs-room-meta">
+            <span><i class="pi pi-expand"></i> {{ room.size }} m²</span>
+          </div>
+          <div class="hs-room-footer">
+            <span class="hs-room-price">{{ room.price }} zł <small>/ miesiąc</small></span>
+            <span class="hs-room-more">Szczegóły <i class="pi pi-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- o nas preview -->
+<section class="hs-section hs-section--dark">
+  <div class="hs-wrap">
+    <div class="hs-about-grid">
+
+      <div class="hs-about-img">
+        <img src="/assets/photos/historyczne/Szkola_Podstawowa_nr_1_im_gen_Jozefa_Bema_ul_Wojska_Polskiego_Bystrzyca_Klodzka_107777-1927.jpg" alt="Budynek WP6" />
+        <div class="hs-about-img-label">
+          <i class="pi pi-clock"></i> Budynek z historią sięgającą XIX wieku
+        </div>
+      </div>
+
+      <div class="hs-about-text">
+        <span class="hs-eyebrow">o nas</span>
+        <h2 class="hs-title">Budynek z historią,<br>lokale na miarę XXI wieku</h2>
+        <p class="hs-about-desc">
+          Budynek przy ul. Wojska Polskiego 6 to zabytkowa willa wybudowana w 1896 roku,
+          która przeszła kompleksowy remont od podstaw. Wymienione instalacje,
+          nowa elewacja i starannie zaprojektowane wnętrza tworzą przestrzeń
+          łączącą historyczny charakter z nowoczesnym komfortem.
+        </p>
+        <div class="hs-about-features">
+          <div class="hs-about-feature">
+            <i class="pi pi-car"></i> Prywatny parking
+          </div>
+          <div class="hs-about-feature">
+            <i class="pi pi-video"></i> Monitoring 24/7
+          </div>
+          <div class="hs-about-feature">
+            <i class="pi pi-map-marker"></i> Centrum miasta
+          </div>
+        </div>
+        <a routerLink="/about" class="hs-link-btn hs-link-btn--light">
+          Poznaj historię <i class="pi pi-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- kontakt CTA -->
+<section class="hs-section">
+  <div class="hs-wrap">
+    <div class="hs-cta">
+      <span class="hs-eyebrow">kontakt</span>
+      <h2 class="hs-title">Zainteresowany wynajmem?</h2>
+      <p class="hs-subtitle">
+        Skontaktuj się z nami, odpowiemy na każde pytanie i pomożemy znaleźć idealny lokal dla Twojej firmy.
+      </p>
+      <div class="hs-cta-btns">
+        <a routerLink="/contact" class="hs-cta-btn hs-cta-btn--primary">
+          <i class="pi pi-envelope"></i> Napisz do nas
+        </a>
+        <a href="tel:+48514270784" class="hs-cta-btn hs-cta-btn--outline">
+          <i class="pi pi-phone"></i> +48 514 270 784
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

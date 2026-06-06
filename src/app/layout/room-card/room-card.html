@@ -1,0 +1,86 @@
+<!-- room-card.component.html -->
+<div class="rv-wrap">
+
+  <div class="rv-header">
+    
+    <div class="rv-header-left">
+      <span class="rv-eyebrow">oferta</span>
+      <span class="rv-title">Dostępne pomieszczenia</span>
+                      <div role="alert" aria-live="polite" class="p-message p-message-info">
+        <p-message severity="info">Podane ceny są orientacyjne i podlegają negocjacji</p-message> </div>
+    </div>
+    <div class="rv-toggle">
+      <button class="rv-toggle-btn" [class.active]="layout === 'grid'" (click)="layout = 'grid'" aria-label="Widok siatki">
+        <i class="pi pi-table"></i>
+      </button>
+      <button class="rv-toggle-btn" [class.active]="layout === 'list'" (click)="layout = 'list'" aria-label="Widok listy">
+        <i class="pi pi-bars"></i>
+      </button>
+    </div>
+  </div>
+
+  <p-dataview [value]="(rooms) ?? []" [layout]="layout">
+
+    <ng-template #grid let-items>
+      <div class="rv-grid">
+<div *ngFor="let room of items" class="rv-card" [routerLink]="['/rooms', room.id]">          <div class="rv-img">
+              <img
+    *ngIf="room.photosUrls?.length"
+    [src]="room.photosUrls[0]"
+    [alt]="room.name"
+    class="rv-img-photo"
+    (error)="onImgError($event)"
+  />
+  <i *ngIf="!room.photosUrls?.length" class="pi pi-building"></i>
+            <span class="rv-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
+              {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
+            </span>
+          </div>
+          <div class="rv-body">
+            <div class="rv-name">{{ room.name }}</div>
+            <div class="rv-desc">{{ room.description }}</div>
+            <div class="rv-meta">
+              <i class="pi pi-expand"></i>{{ room.size }} m²
+            </div>
+            <div class="rv-footer">
+              <span class="rv-price" *ngIf="room.isAvailable"> {{ room.price }} zł <small>/miesięcznie</small></span>
+              <button class="rv-btn">Zobacz więcej</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #list let-items>
+      <div class="rv-list">
+<div *ngFor="let room of items" class="rv-list-item" [routerLink]="['/rooms', room.id]">
+  <div class="rv-thumb">
+  <img
+    *ngIf="room.photosUrls?.length"
+    [src]="room.photosUrls[0]"
+    [alt]="room.name"
+    class="rv-thumb-photo"
+    (error)="onImgError($event)"
+  />
+  <i *ngIf="!room.photosUrls?.length" class="pi pi-building"></i>
+</div>
+          <div class="rv-info">
+            <div class="rv-name">{{ room.name }}</div>
+            <div class="rv-desc">{{ room.description }}</div>
+            <div class="rv-meta">
+              <i class="pi pi-expand"></i>{{ room.size }} m²
+            </div>
+          </div>
+          <div class="rv-right">
+            <span class="rv-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
+              {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
+            </span>
+            <span *ngIf="room.isAvailable" class="rv-price" > {{ room.price }} zł <small>/miesięcznie</small></span>
+            <button class="rv-btn">Zobacz więcej</button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+  </p-dataview>
+</div>

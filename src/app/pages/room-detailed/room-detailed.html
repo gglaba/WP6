@@ -1,0 +1,73 @@
+<div class="rd-wrap" *ngIf="room; else loading">
+
+  <a class="rd-back" routerLink="/rooms">
+    <i class="pi pi-arrow-left"></i> Wróć do oferty
+  </a>
+
+  <div class="rd-layout">
+
+    <div class="rd-gallery">
+      <div class="rd-main-photo">
+        <img [src]="selectedPhoto" [alt]="room.name" />
+        <button class="rd-arrow rd-arrow-left" (click)="prevPhoto()" aria-label="Poprzednie">
+          <i class="pi pi-chevron-left"></i>
+        </button>
+        <button class="rd-arrow rd-arrow-right" (click)="nextPhoto()" aria-label="Następne">
+          <i class="pi pi-chevron-right"></i>
+        </button>
+        <div class="rd-badge-wrap">
+          <span class="rd-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
+            {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="rd-dots">
+        <div
+          *ngFor="let photo of room.photosUrls; let i = index"
+          class="rd-dot"
+          [class.active]="photo === selectedPhoto"
+          (click)="selectPhoto(photo)"
+        ></div>
+      </div>
+
+      <div class="rd-thumbs">
+        <div
+          *ngFor="let photo of room.photosUrls"
+          class="rd-thumb"
+          [class.active]="photo === selectedPhoto"
+          (click)="selectPhoto(photo)"
+        >
+          <img [src]="photo" [alt]="room.name" />
+        </div>
+      </div>
+    </div>
+
+    <div class="rd-info">
+      <div class="rd-eyebrow">pomieszczenie</div>
+      <h1 class="rd-title">{{ room.name }}</h1>
+      <p class="rd-desc">{{ room.description }}</p>
+
+      <div class="rd-specs">
+        <div class="rd-spec">
+          <i class="pi pi-expand"></i>
+          <span>{{ room.size }} m²</span>
+        </div>
+        <div class="rd-divider"></div>
+        <div class="rd-spec">
+          <i class="pi pi-tag"></i>
+          <span>{{ room.price }} zł / miesiąc</span>
+        </div>
+      </div>
+
+<a class="rd-btn" [routerLink]="['/contact']" [queryParams]="{ pokoje: room.id }">
+  <i class="pi pi-envelope"></i> Zapytaj o wynajem
+</a>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="rd-loading">Ładowanie...</div>
+</ng-template>

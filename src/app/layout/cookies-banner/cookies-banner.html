@@ -1,0 +1,60 @@
+<div class="cb-overlay" *ngIf="visible">
+  <div class="cb-banner">
+
+    <div class="cb-main">
+      <div class="cb-text">
+        <span class="cb-title">Ta strona używa plików cookies</span>
+        <p class="cb-desc">
+Używamy niezbędnych technologii przechowywania danych w przeglądarce do zapamiętania Twoich preferencji. Za Twoją zgodą możemy również ładować zewnętrzne usługi, takie jak Google Maps. Więcej w
+          <a routerLink="/polityka-prywatnosci" class="cb-link">polityce prywatności</a>.
+        </p>
+      </div>
+
+      <div class="cb-actions">
+        <button class="cb-btn cb-btn-ghost" (click)="acceptNecessary()">
+          Tylko niezbędne
+        </button>
+        <button class="cb-btn cb-btn-outline" (click)="showDetails = !showDetails">
+          Dostosuj
+        </button>
+        <button class="cb-btn cb-btn-primary" (click)="acceptAll()">
+          Akceptuj wszystkie
+        </button>
+      </div>
+    </div>
+
+    <!-- panel szczegółowy -->
+    <div class="cb-details" *ngIf="showDetails">
+      <div class="cb-detail-row">
+        <div class="cb-detail-info">
+          <span class="cb-detail-name">Niezbędne</span>
+          <span class="cb-detail-desc">Wymagane do działania strony. Nie można wyłączyć.</span>
+        </div>
+        <div class="cb-toggle cb-toggle-locked">
+          <i class="pi pi-lock"></i> Zawsze aktywne
+        </div>
+      </div>
+
+      <div class="cb-detail-row">
+        <div class="cb-detail-info">
+          <span class="cb-detail-name">Google Maps</span>
+          <span class="cb-detail-desc">
+            Umożliwia wyświetlanie mapy z lokalizacją biura.
+            Google może ustawiać własne pliki cookies.
+          </span>
+        </div>
+        <label class="cb-toggle-switch">
+          <input type="checkbox" [(ngModel)]="custom.thirdParty" />
+          <span class="cb-slider"></span>
+        </label>
+      </div>
+
+      <div class="cb-detail-actions">
+        <button class="cb-btn cb-btn-primary" (click)="saveCustom()">
+          Zapisz preferencje
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

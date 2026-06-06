@@ -1,0 +1,83 @@
+<nav class="sticky top-0 z-50 bg-white border-b border-gray-200 px-6 py-4">
+  <div class="flex items-center w-full">
+
+    <div class="mr-4 md:hidden">
+      <button
+        class="p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+        (click)="menuOpen.set(!menuOpen())">
+        <i class="pi pi-bars text-xl"></i>
+      </button>
+    </div>
+
+    <a routerLink="/" class="text-xl font-bold text-gray-900">
+      WP6
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0 flex-1 justify-center">
+      <!-- <li>
+        <a routerLink="/"
+           routerLinkActive="text-blue-600 font-medium"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="text-gray-600 hover:text-gray-900 transition-colors">
+          Strona główna
+        </a>
+      </li> -->
+      <li>
+        <a routerLink="/rooms"
+           routerLinkActive="text-blue-600 font-medium"
+           class="text-gray-600 hover:text-gray-900 transition-colors">
+          Oferta
+        </a>
+      </li>
+      <li>
+        <a routerLink="/about"
+           routerLinkActive="text-blue-600 font-medium"
+           class="text-gray-600 hover:text-gray-900 transition-colors">
+          O nas
+        </a>
+      </li>
+            <li>
+        <a routerLink="/contact"
+           routerLinkActive="text-blue-600 font-medium"
+           class="text-gray-600 hover:text-gray-900 transition-colors">
+          Kontakt
+        </a>
+      </li>
+    </ul>
+
+    <div class="hidden md:block w-[theme(spacing.20)]"></div>
+
+  </div>
+
+  @if (menuOpen()) {
+    <div class="md:hidden mt-4 pb-4 border-t border-gray-100">
+      <ul class="flex flex-col gap-1 mt-4 list-none m-0 p-0">
+        <li>
+          <a routerLink="/" (click)="menuOpen.set(false)"
+             class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
+            Strona główna
+          </a>
+        </li>
+        <li>
+          <a routerLink="/rooms" (click)="menuOpen.set(false)"
+             class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
+            Oferta
+          </a>
+        </li>
+        <li>
+          <a routerLink="/about" (click)="menuOpen.set(false)"
+             class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
+            O nas
+          </a>
+        </li>
+          <li>
+          <a routerLink="/contact" (click)="menuOpen.set(false)"
+             class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">
+            Kontakt
+          </a>
+        </li>
+      </ul>
+    </div>
+  }
+
+</nav>

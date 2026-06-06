@@ -1,0 +1,162 @@
+<div class="ab-wrap">
+
+  <!-- hero -->
+  <div class="ab-hero">
+    <img src="/assets/photos/zewnatrz/20260604_124625.jpg" alt="Budynek WP6" class="ab-hero-img" />
+    <div class="ab-hero-overlay"></div>
+    <div class="ab-hero-content">
+      <div class="ab-hero-eyebrow">Bystrzyca Kłodzka</div>
+      <h1 class="ab-hero-title">ul. Wojska Polskiego 6</h1>
+    </div>
+  </div>
+
+  <!-- historia -->
+  <div class="ab-history">
+    <div class="ab-history-text">
+      <span class="ab-eyebrow">historia</span>
+      <h2 class="ab-section-title">Budynek z historią - XIX wiek</h2>
+      <p class="ab-section-text">
+        Willa przy ul. Wojska Polskiego 6 to jeden z charakterystycznych budynków
+        Bystrzycy Kłodzkiej, którego historia sięga XIX wieku. Początkowo jako willa mieszkalna, przez ponad sto lat
+        budynek stał się nieodłącznym elementem pejzażu miasta oraz świadkiem jego przemian.
+      </p>
+      <p class="ab-section-text">
+        Budynek przeszedł kompleksową renowację i remont przeprowadzony od podstaw.
+        Wymieniono wszystkie instalacje: elektryczną, wodno-kanalizacyjną, grzewczą
+        i telekomunikacyjną. Odnowiono elewację, stropy i wymieniono dach,
+        przywracając budynkowi dawną świetność przy zachowaniu jego historycznego
+        charakteru.
+      </p>
+      <p class="ab-section-text">
+        Wnętrza zostały zaprojektowane z dbałością o klimat miejsca - solidne materiały,
+        stonowana kolorystyka i starannie dobrane detale tworzą przestrzeń, która
+        sprzyja prowadzeniu działalności i budowaniu profesjonalnego wizerunku firmy.
+      </p>
+    </div>
+
+    <div class="ab-old-photo-wrap">
+      <img
+        src="/assets/photos/zewnatrz/20260604_124516.jpg"
+        alt="Archiwalne zdjęcie budynku"
+        class="ab-old-photo-img"
+      />
+      <div class="ab-old-photo-caption">
+        <i class="pi pi-compass"></i> Budynek od strony północnej
+      </div>
+    </div>
+  </div>
+
+  <!-- oś czasu -->
+  <div class="ab-timeline">
+    <span class="ab-eyebrow">historia budynku</span>
+    <h2 class="ab-section-title">Ponad {{this.age}} lat historii</h2>
+
+    <div class="tl-eras">
+      <button
+        *ngFor="let era of timeline; let i = index"
+        class="tl-era-btn"
+        [class.active]="i === currentEra"
+        (click)="selectEra(i)"
+      >
+        <span class="tl-era-year">{{ era.year }}</span>
+        <span class="tl-era-label">{{ era.label }}</span>
+      </button>
+    </div>
+
+    <div class="tl-content">
+      <div class="tl-photos">
+        <div class="tl-main-photo" [class.tl-sepia]="activeEra.sepia">
+          <img [src]="activePhoto.url" [alt]="activePhoto.alt" />
+        </div>
+        <div class="tl-thumbs" *ngIf="activeEra.photos.length > 1">
+          <div
+            *ngFor="let photo of activeEra.photos; let i = index"
+            class="tl-thumb"
+            [class.active]="i === currentPhotoIndex"
+            (click)="selectPhoto(i)"
+          >
+            <img [src]="photo.url" [alt]="photo.alt" />
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-info">
+        <div class="tl-year-big">{{ activeEra.year }}</div>
+        <div class="tl-era-title">{{ activeEra.title }}</div>
+        <p class="tl-era-desc">{{ activeEra.desc }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- otoczenie -->
+  <div class="ab-surroundings">
+    <span class="ab-eyebrow">otoczenie</span>
+    <h2 class="ab-section-title">Wyjątkowa lokalizacja</h2>
+    <p class="ab-section-text ab-section-text--lead">
+      Budynek leży w samym sercu historycznej Bystrzycy Kłodzkiej,
+      otoczony zabytkami które tworzą niepowtarzalny klimat miejsca.
+    </p>
+    <div class="ab-surr-grid">
+      <div *ngFor="let s of surroundings" class="ab-surr-card">
+        <div class="ab-surr-emoji">{{ s.emoji }}</div>
+        <div class="ab-surr-body">
+          <div class="ab-surr-title">{{ s.title }}</div>
+          <div class="ab-surr-desc">{{ s.desc }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- galeria zewnętrzna
+  <div class="ab-gallery">
+    <span class="ab-eyebrow">budynek dziś</span>
+    <div class="ab-gallery-grid">
+      <div *ngFor="let photo of exteriorPhotos" class="ab-gallery-item">
+        <img [src]="photo.url" [alt]="photo.alt" />
+      </div>
+    </div>
+  </div> -->
+
+  <!-- udogodnienia -->
+  <div class="ab-features">
+    <span class="ab-eyebrow">udogodnienia</span>
+    <h2 class="ab-section-title">Co zyskujesz</h2>
+    <div class="ab-features-grid">
+      <div *ngFor="let f of features" class="ab-feature-card">
+        <div class="ab-feature-icon">
+          <i [class]="'pi ' + f.icon"></i>
+        </div>
+        <div class="ab-feature-body">
+          <div class="ab-feature-title">{{ f.title }}</div>
+          <div class="ab-feature-desc">{{ f.desc }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- odległości -->
+  <div class="ab-distances">
+    <span class="ab-eyebrow">lokalizacja</span>
+    <h2 class="ab-section-title">W centrum wszystkiego</h2>
+    <p class="ab-distances-sub">
+      Najważniejsze instytucje i punkty miasta w zasięgu krótkiego spaceru -
+      idealne dla firm obsługujących klientów instytucjonalnych.
+    </p>
+    <div class="ab-dist-grid">
+      <div *ngFor="let place of nearbyPlaces" class="ab-dist-card">
+        <div class="ab-dist-icon">{{ place.emoji }}</div>
+        <div class="ab-dist-name">{{ place.name }}</div>
+        <div class="ab-dist-addr">{{ place.address }}</div>
+        <div class="ab-dist-row">
+          <span class="ab-dist-pill">
+            <i class="pi pi-user"></i> {{ place.walk }} min
+          </span>
+          <span class="ab-dist-pill">
+            <i class="pi pi-map-marker"></i> {{ place.distance }} m
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
