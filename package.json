@@ -1,14 +1,14 @@
 {
   "name": "biura-bystrzyca",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:biura-bystrzyca": "node dist/biura-bystrzyca/server/server.mjs"
-  },
+"scripts": {
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build --configuration=production",
+  "build:dev": "ng build --configuration=staging",
+  "build:local": "ng build --configuration=development",
+  "test": "ng test"
+},
   "private": true,
   "packageManager": "npm@11.14.1",
   "dependencies": {
@@ -19,7 +19,6 @@
     "@angular/platform-browser": "^21.2.0",
     "@angular/platform-server": "^21.2.0",
     "@angular/router": "^21.2.0",
-    "@angular/ssr": "^21.2.11",
     "@primeuix/themes": "^2.0.3",
     "express": "^5.1.0",
     "hls.js": "^1.6.16",
@@ -32,6 +31,7 @@
     "@angular/build": "^21.2.11",
     "@angular/cli": "^21.2.11",
     "@angular/compiler-cli": "^21.2.0",
+    "@cloudflare/workers-types": "^4.20260606.1",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
@@ -40,6 +40,7 @@
     "prettier": "^3.8.1",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "wrangler": "^4.98.0"
   }
 }
