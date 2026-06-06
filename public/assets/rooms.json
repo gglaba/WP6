@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Pokój Standardowy",
+    "size": 20,
+    "price": 150,
+    "isAvailable": true,
+    "description": "Przytulny pokój z widokiem na ogród.",
+    "photosUrls": [
+      "/assets/photos/20190822_100738.jpg",
+      "/assets/photos/20190822_100700.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Pokój Deluxe",
+    "size": 35,
+    "price": 280,
+    "isAvailable": false,
+    "description": "Przestronny pokój z balkonem i wanną.",
+    "photosUrls": [
+      "/assets/photos/20190822_100901.jpg",
+      "/assets/photos/20190822_100837.jpg"
+    ]
+  }
+]
