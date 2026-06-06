@@ -2,7 +2,7 @@
 
   <!-- hero -->
   <div class="ab-hero">
-    <img src="/assets/photos/zewnatrz/20260604_124625.jpg" alt="Budynek WP6" class="ab-hero-img" />
+    <img [src]="heroPhoto" alt="Budynek WP6" class="ab-hero-img" />
     <div class="ab-hero-overlay"></div>
     <div class="ab-hero-content">
       <div class="ab-hero-eyebrow">Bystrzyca Kłodzka</div>
@@ -35,11 +35,7 @@
     </div>
 
     <div class="ab-old-photo-wrap">
-      <img
-        src="/assets/photos/zewnatrz/20260604_124516.jpg"
-        alt="Archiwalne zdjęcie budynku"
-        class="ab-old-photo-img"
-      />
+<img [src]="historyPhoto" alt="Archiwalne zdjęcie budynku" class="ab-old-photo-img" />
       <div class="ab-old-photo-caption">
         <i class="pi pi-compass"></i> Budynek od strony północnej
       </div>

@@ -55,6 +55,8 @@ export class About implements OnInit {
   nearbyPlaces: NearbyPlace[] = [];
   features: Feature[] = [];
   surroundings: Surrounding[] = [];
+  heroPhoto = '';
+  historyPhoto = '';
 
   age = new Date().getFullYear() - 1896;
 
@@ -69,6 +71,9 @@ export class About implements OnInit {
       { url: this.media.photo('zewnatrz/20260604_124743.jpg'), alt: 'Budynek od strony ulicy' },
       { url: this.media.photo('zewnatrz/20260604_124540.jpg'), alt: 'Parking oraz wejście boczne' },
     ];
+
+    this.heroPhoto = this.media.photo('zewnatrz/20260604_124625.jpg');
+    this.historyPhoto = this.media.photo('zewnatrz/20260604_124516.jpg');
 
     this.timeline = [
       {
