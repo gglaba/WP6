@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MediaService } from '../../service/media.service';
 
@@ -48,7 +48,7 @@ interface TimelineEra {
   templateUrl: './about.html',
   styleUrl: './about.css',
 })
-export class About implements OnInit {
+export class About implements OnInit, AfterViewInit {
 
   exteriorPhotos: Photo[] = [];
   timeline: TimelineEra[] = [];
@@ -64,6 +64,30 @@ export class About implements OnInit {
   currentPhotoIndex = 0;
 
   constructor(private media: MediaService) {}
+
+  @ViewChildren('animEl') animElements!: QueryList<ElementRef>;
+
+ngAfterViewInit(): void {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    },
+    {
+      threshold: 0,
+      rootMargin: '0px 0px -80px 0px' // ← element musi być 80px w viewport żeby się pokazał
+    }
+  );
+
+  this.animElements.forEach((el) => {
+    observer.observe(el.nativeElement);
+  });
+}
 
   ngOnInit(): void {
     this.exteriorPhotos = [

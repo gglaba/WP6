@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit,AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { RouterOutlet } from "../../../../node_modules/@angular/router/types/_router_module-chunk";
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -22,11 +22,11 @@ interface Slide {
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit{
+export class Home implements OnInit, AfterViewInit {
 
   aboutPhoto = '';
   rooms: Room[] = [];
-
+  @ViewChildren('animEl') animElements!: QueryList<ElementRef>;
   constructor(private roomsService: RoomsService, private media: MediaService) {}
 
   ngOnInit(): void {
@@ -38,4 +38,29 @@ export class Home implements OnInit{
     });
   }
 
+ngAfterViewInit(): void {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    },
+    {
+      threshold: 0,
+      rootMargin: '0px 0px -80px 0px'
+    }
+  );
+
+  // obserwuj elementy które już istnieją
+  this.animElements.forEach((el) => observer.observe(el.nativeElement));
+
+  // obserwuj nowe elementy gdy się pojawią (po załadowaniu rooms)
+  this.animElements.changes.subscribe((els) => {
+    els.forEach((el: ElementRef) => observer.observe(el.nativeElement));
+  });
+}
 }

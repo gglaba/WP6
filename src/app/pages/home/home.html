@@ -1,9 +1,9 @@
 <app-carousel />
 
+<!-- oferta -->
 <section class="hs-section">
   <div class="hs-wrap">
-
-    <div class="hs-header">
+    <div class="hs-header anim-fade-up" #animEl>
       <div class="hs-header-text">
         <span class="hs-eyebrow">oferta</span>
         <h2 class="hs-title">Dostępne pomieszczenia</h2>
@@ -17,13 +17,15 @@
     </div>
 
     <div class="hs-rooms-grid">
-      <div *ngFor="let room of rooms" class="hs-room-card" [routerLink]="['/rooms', room.id]">
+      <div
+        *ngFor="let room of rooms; let i = index"
+        class="hs-room-card anim-fade-up"
+        #animEl
+        [style.transition-delay]="i * 100 + 'ms'"
+        [routerLink]="['/rooms', room.id]"
+      >
         <div class="hs-room-img">
-          <img
-            *ngIf="room.photosUrls.length"
-            [src]="room.photosUrls[0]"
-            [alt]="room.name"
-          />
+          <img *ngIf="room.photosUrls.length" [src]="room.photosUrls[0]" [alt]="room.name" />
           <i *ngIf="!room.photosUrls.length" class="pi pi-building"></i>
           <span class="hs-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
             {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
@@ -41,7 +43,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -49,15 +50,13 @@
 <section class="hs-section hs-section--dark">
   <div class="hs-wrap">
     <div class="hs-about-grid">
-
-      <div class="hs-about-img">
+      <div class="hs-about-img anim-slide-left" #animEl>
         <img [src]="aboutPhoto" alt="Budynek WP6" />
         <div class="hs-about-img-label">
           <i class="pi pi-clock"></i> Budynek z historią sięgającą XIX wieku
         </div>
       </div>
-
-      <div class="hs-about-text">
+      <div class="hs-about-text anim-slide-right" #animEl>
         <span class="hs-eyebrow">o nas</span>
         <h2 class="hs-title">Budynek z historią,<br>lokale na miarę XXI wieku</h2>
         <p class="hs-about-desc">
@@ -81,7 +80,6 @@
           Poznaj historię <i class="pi pi-arrow-right"></i>
         </a>
       </div>
-
     </div>
   </div>
 </section>
@@ -89,7 +87,7 @@
 <!-- kontakt CTA -->
 <section class="hs-section">
   <div class="hs-wrap">
-    <div class="hs-cta">
+    <div class="hs-cta anim-fade-up" #animEl>
       <span class="hs-eyebrow">kontakt</span>
       <h2 class="hs-title">Zainteresowany wynajmem?</h2>
       <p class="hs-subtitle">

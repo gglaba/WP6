@@ -26,6 +26,32 @@
   margin-bottom: 8px;
 }
 
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.anim-slide-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.anim-slide-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.anim-fade-up.visible,
+.anim-slide-left.visible,
+.anim-slide-right.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+
 .hs-title {
   font-size: 28px;
   font-weight: 500;
