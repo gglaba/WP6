@@ -3,7 +3,7 @@
 <!-- oferta -->
 <section class="hs-section">
   <div class="hs-wrap">
-    <div class="hs-header anim-fade-up" #animEl>
+    <div class="hs-header anim-blur" #animEl>
       <div class="hs-header-text">
         <span class="hs-eyebrow">oferta</span>
         <h2 class="hs-title">Dostępne pomieszczenia</h2>
@@ -19,9 +19,9 @@
     <div class="hs-rooms-grid">
       <div
         *ngFor="let room of rooms; let i = index"
-        class="hs-room-card anim-fade-up"
+        class="hs-room-card anim-flip"
         #animEl
-        [style.transition-delay]="i * 100 + 'ms'"
+        [style.transition-delay]="i * 120 + 'ms'"
         [routerLink]="['/rooms', room.id]"
       >
         <div class="hs-room-img">
@@ -56,7 +56,7 @@
           <i class="pi pi-clock"></i> Budynek z historią sięgającą XIX wieku
         </div>
       </div>
-      <div class="hs-about-text anim-slide-right" #animEl>
+      <div class="hs-about-text anim-blur" #animEl>
         <span class="hs-eyebrow">o nas</span>
         <h2 class="hs-title">Budynek z historią,<br>lokale na miarę XXI wieku</h2>
         <p class="hs-about-desc">
@@ -87,7 +87,7 @@
 <!-- kontakt CTA -->
 <section class="hs-section">
   <div class="hs-wrap">
-    <div class="hs-cta anim-fade-up" #animEl>
+    <div class="hs-cta anim-zoom" #animEl>
       <span class="hs-eyebrow">kontakt</span>
       <h2 class="hs-title">Zainteresowany wynajmem?</h2>
       <p class="hs-subtitle">
