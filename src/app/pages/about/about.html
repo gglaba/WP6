@@ -1,8 +1,8 @@
 <div class="ab-wrap">
 
-  <!-- hero -->
+  <!-- hero — bez animacji, jest na górze -->
   <div class="ab-hero">
-    <img src="/assets/photos/zewnatrz/20260604_124625.jpg" alt="Budynek WP6" class="ab-hero-img" />
+    <img [src]="heroPhoto" alt="Budynek WP6" class="ab-hero-img" />
     <div class="ab-hero-overlay"></div>
     <div class="ab-hero-content">
       <div class="ab-hero-eyebrow">Bystrzyca Kłodzka</div>
@@ -12,7 +12,7 @@
 
   <!-- historia -->
   <div class="ab-history">
-    <div class="ab-history-text">
+    <div class="ab-history-text anim-slide-left" #animEl>
       <span class="ab-eyebrow">historia</span>
       <h2 class="ab-section-title">Budynek z historią - XIX wiek</h2>
       <p class="ab-section-text">
@@ -34,12 +34,8 @@
       </p>
     </div>
 
-    <div class="ab-old-photo-wrap">
-      <img
-        src="/assets/photos/zewnatrz/20260604_124516.jpg"
-        alt="Archiwalne zdjęcie budynku"
-        class="ab-old-photo-img"
-      />
+    <div class="ab-old-photo-wrap anim-slide-right" #animEl>
+      <img [src]="historyPhoto" alt="Archiwalne zdjęcie budynku" class="ab-old-photo-img" />
       <div class="ab-old-photo-caption">
         <i class="pi pi-compass"></i> Budynek od strony północnej
       </div>
@@ -48,10 +44,12 @@
 
   <!-- oś czasu -->
   <div class="ab-timeline">
-    <span class="ab-eyebrow">historia budynku</span>
-    <h2 class="ab-section-title">Ponad {{this.age}} lat historii</h2>
+    <div class="anim-fade-up" #animEl>
+      <span class="ab-eyebrow">historia budynku</span>
+      <h2 class="ab-section-title">Ponad {{ age }} lat historii</h2>
+    </div>
 
-    <div class="tl-eras">
+    <div class="tl-eras anim-fade-up" #animEl>
       <button
         *ngFor="let era of timeline; let i = index"
         class="tl-era-btn"
@@ -64,7 +62,7 @@
     </div>
 
     <div class="tl-content">
-      <div class="tl-photos">
+      <div class="tl-photos anim-slide-left" #animEl>
         <div class="tl-main-photo" [class.tl-sepia]="activeEra.sepia">
           <img [src]="activePhoto.url" [alt]="activePhoto.alt" />
         </div>
@@ -80,7 +78,7 @@
         </div>
       </div>
 
-      <div class="tl-info">
+      <div class="tl-info anim-slide-right" #animEl>
         <div class="tl-year-big">{{ activeEra.year }}</div>
         <div class="tl-era-title">{{ activeEra.title }}</div>
         <p class="tl-era-desc">{{ activeEra.desc }}</p>
@@ -90,14 +88,21 @@
 
   <!-- otoczenie -->
   <div class="ab-surroundings">
-    <span class="ab-eyebrow">otoczenie</span>
-    <h2 class="ab-section-title">Wyjątkowa lokalizacja</h2>
-    <p class="ab-section-text ab-section-text--lead">
-      Budynek leży w samym sercu historycznej Bystrzycy Kłodzkiej,
-      otoczony zabytkami które tworzą niepowtarzalny klimat miejsca.
-    </p>
+    <div class="anim-fade-up" #animEl>
+      <span class="ab-eyebrow">otoczenie</span>
+      <h2 class="ab-section-title">Wyjątkowa lokalizacja</h2>
+      <p class="ab-section-text ab-section-text--lead">
+        Budynek leży w samym sercu historycznej Bystrzycy Kłodzkiej,
+        otoczony zabytkami które tworzą niepowtarzalny klimat miejsca.
+      </p>
+    </div>
     <div class="ab-surr-grid">
-      <div *ngFor="let s of surroundings" class="ab-surr-card">
+      <div
+        *ngFor="let s of surroundings; let i = index"
+        class="ab-surr-card anim-fade-up"
+        #animEl
+        [style.transition-delay]="i * 100 + 'ms'"
+      >
         <div class="ab-surr-emoji">{{ s.emoji }}</div>
         <div class="ab-surr-body">
           <div class="ab-surr-title">{{ s.title }}</div>
@@ -107,22 +112,19 @@
     </div>
   </div>
 
-  <!-- galeria zewnętrzna
-  <div class="ab-gallery">
-    <span class="ab-eyebrow">budynek dziś</span>
-    <div class="ab-gallery-grid">
-      <div *ngFor="let photo of exteriorPhotos" class="ab-gallery-item">
-        <img [src]="photo.url" [alt]="photo.alt" />
-      </div>
-    </div>
-  </div> -->
-
   <!-- udogodnienia -->
   <div class="ab-features">
-    <span class="ab-eyebrow">udogodnienia</span>
-    <h2 class="ab-section-title">Co zyskujesz</h2>
+    <div class="anim-fade-up" #animEl>
+      <span class="ab-eyebrow">udogodnienia</span>
+      <h2 class="ab-section-title">Co zyskujesz</h2>
+    </div>
     <div class="ab-features-grid">
-      <div *ngFor="let f of features" class="ab-feature-card">
+      <div
+        *ngFor="let f of features; let i = index"
+        class="ab-feature-card anim-fade-up"
+        #animEl
+        [style.transition-delay]="i * 100 + 'ms'"
+      >
         <div class="ab-feature-icon">
           <i [class]="'pi ' + f.icon"></i>
         </div>
@@ -136,14 +138,21 @@
 
   <!-- odległości -->
   <div class="ab-distances">
-    <span class="ab-eyebrow">lokalizacja</span>
-    <h2 class="ab-section-title">W centrum wszystkiego</h2>
-    <p class="ab-distances-sub">
-      Najważniejsze instytucje i punkty miasta w zasięgu krótkiego spaceru -
-      idealne dla firm obsługujących klientów instytucjonalnych.
-    </p>
+    <div class="anim-fade-up" #animEl>
+      <span class="ab-eyebrow">lokalizacja</span>
+      <h2 class="ab-section-title">W centrum wszystkiego</h2>
+      <p class="ab-distances-sub">
+        Najważniejsze instytucje i punkty miasta w zasięgu krótkiego spaceru -
+        idealne dla firm obsługujących klientów instytucjonalnych.
+      </p>
+    </div>
     <div class="ab-dist-grid">
-      <div *ngFor="let place of nearbyPlaces" class="ab-dist-card">
+      <div
+        *ngFor="let place of nearbyPlaces; let i = index"
+        class="ab-dist-card anim-fade-up"
+        #animEl
+        [style.transition-delay]="i * 80 + 'ms'"
+      >
         <div class="ab-dist-icon">{{ place.emoji }}</div>
         <div class="ab-dist-name">{{ place.name }}</div>
         <div class="ab-dist-addr">{{ place.address }}</div>

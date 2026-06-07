@@ -15,7 +15,7 @@ export interface Room {
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
-  private readonly jsonPath = 'assets/rooms.json';
+  private readonly jsonPath = 'rooms.json';
   private rooms$: Observable<Room[]> | null = null;
 
   constructor(private http: HttpClient) {}

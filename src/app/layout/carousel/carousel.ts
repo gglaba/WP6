@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import {isPlatformBrowser} from '@angular/common';
 import { inject, PLATFORM_ID } from '@angular/core';
 import Hls from 'hls.js';
+import { MediaService } from '../../service/media.service';
 
 interface Slide {
   heading: string;
@@ -17,6 +18,8 @@ interface Slide {
   styleUrl: './carousel.css',
 })
 export class Carousel implements OnInit, OnDestroy {
+
+  constructor(private media: MediaService) {}
 
 @ViewChild('videoEl') videoEl!: ElementRef<HTMLVideoElement>;
 
@@ -46,29 +49,27 @@ slides = [
     }
   }
 
-  ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.initHls();
-    }
+ngAfterViewInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    this.initHls(this.media.video('hero.m3u8'));
   }
+}
 
   ngOnDestroy() {
     if (this.interval) clearInterval(this.interval);
     if (this.hls) this.hls.destroy();
   }
 
-  initHls() {
-    const video = this.videoEl.nativeElement;
-    const src = '/assets/videos/hero.m3u8';
-
-    if (Hls.isSupported()) {
-      this.hls = new Hls({ startLevel: 0, capLevelToPlayerSize: true });
-      this.hls.loadSource(src);
-      this.hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = src;
-    }
+initHls(src: string) {
+  const video = this.videoEl.nativeElement;
+  if (Hls.isSupported()) {
+    this.hls = new Hls({ startLevel: 0, capLevelToPlayerSize: true });
+    this.hls.loadSource(src);
+    this.hls.attachMedia(video);
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = src;
   }
+}
 
   next() {
     this.currentIndex.set((this.currentIndex() + 1) % this.slides.length);
