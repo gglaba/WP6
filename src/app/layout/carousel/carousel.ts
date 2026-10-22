@@ -63,7 +63,11 @@ ngAfterViewInit() {
 initHls(src: string) {
   const video = this.videoEl.nativeElement;
   if (Hls.isSupported()) {
-    this.hls = new Hls({ startLevel: 0, capLevelToPlayerSize: true });
+    this.hls = new Hls({
+      startLevel: -1,
+      capLevelToPlayerSize: true,
+      abrBandWidthFactor: 0.85,
+    });
     this.hls.loadSource(src);
     this.hls.attachMedia(video);
   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {

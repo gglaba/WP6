@@ -10,5 +10,5 @@ import { Component } from '@angular/core';
 })
 export class Rodo {
   version = '1.0';
-  date = '03.06.2026';
+  date = '08.06.2026';
 }
