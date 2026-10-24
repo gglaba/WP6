@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, AfterViewInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -11,6 +11,19 @@ import {MessageModule} from 'primeng/message';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CookiesService } from '../../service/cookies.service';
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+      reset: (id?: string) => void;
+      remove: (id?: string) => void;
+    };
+  }
+}
+
+const TURNSTILE_SITE_KEY = '0x4AAAAAAFjyGUc080mKhF_1';
+const TURNSTILE_SCRIPT = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
 interface RoomOption {
   label: string;
@@ -27,7 +40,11 @@ interface RoomOption {
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })
-export class Contact implements OnInit {
+export class Contact implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('turnstileEl') turnstileEl?: ElementRef<HTMLElement>;
+  turnstileToken = '';
+  private turnstileId?: string;
+
   isLoading = false;
   submitted = false;
   allSelected = false;
@@ -53,8 +70,45 @@ export class Contact implements OnInit {
     private apiService: ApiService,
     private http: HttpClient,
     private messageService: MessageService,
-    public cookieService: CookiesService
+    public cookieService: CookiesService,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
+
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (window.turnstile) return this.renderTurnstile();
+    let script = document.querySelector<HTMLScriptElement>('script[data-turnstile]');
+    if (!script) {
+      script = document.createElement('script');
+      script.src = TURNSTILE_SCRIPT;
+      script.async = true;
+      script.defer = true;
+      script.dataset['turnstile'] = '1';
+      document.head.appendChild(script);
+    }
+    script.addEventListener('load', () => this.renderTurnstile());
+  }
+
+  ngOnDestroy(): void {
+    if (this.turnstileId) window.turnstile?.remove(this.turnstileId);
+  }
+
+  private renderTurnstile(): void {
+    if (!this.turnstileEl || !window.turnstile || this.turnstileId) return;
+    this.turnstileId = window.turnstile.render(this.turnstileEl.nativeElement, {
+      sitekey: TURNSTILE_SITE_KEY,
+      action: 'contact',
+      language: 'pl',
+      callback: (token: string) => (this.turnstileToken = token),
+      'expired-callback': () => (this.turnstileToken = ''),
+      'error-callback': () => (this.turnstileToken = ''),
+    });
+  }
+
+  private resetTurnstile(): void {
+    this.turnstileToken = '';
+    if (this.turnstileId) window.turnstile?.reset(this.turnstileId);
+  }
 
   ngOnInit(): void {
     this.roomsService.getRooms().subscribe((rooms) => {
@@ -149,9 +203,9 @@ onSubmit(): void {
     message: this.form.message,
     selectedRooms: this.form.selectedRooms,
     website: this.form.website,
-    rodoConsent: this.form.rodoConsent
+    rodoConsent: this.form.rodoConsent,
+    turnstileToken: this.turnstileToken
   };
-console.log('PAYLOAD:', payload);
   this.apiService.sendContactForm(payload).subscribe({
     next: () => {
   this.isLoading = false;
@@ -168,10 +222,12 @@ console.log('PAYLOAD:', payload);
     website: '', rodoConsent: false
   };
 
+      this.resetTurnstile();
       setTimeout(() => this.submitted = false, 10000);
     },
 error: (err) => {
   this.isLoading = false;
+  this.resetTurnstile();
   if (err.status === 429) {
     this.messageService.add({
       severity: 'warn',

@@ -120,7 +120,8 @@
       <i class="pi pi-exclamation-triangle"></i>
         Aby wysłać wiadomość, musisz wyrazić zgodę na przetwarzanie danych osobowych.
     </div>
-<button class="ct-btn" type="submit" [disabled]="contactForm.invalid || !form.rodoConsent">
+<div #turnstileEl class="ct-turnstile"></div>
+<button class="ct-btn" type="submit" [disabled]="contactForm.invalid || !form.rodoConsent || !turnstileToken">
           <span *ngIf="!isLoading">
     <i class="pi pi-send"></i> Wyślij wiadomość
   </span>

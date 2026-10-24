@@ -15,6 +15,7 @@ export interface ContactRequest {
   selectedRooms: number[];
   website?: string; // pole honeypot
   rodoConsent: boolean;
+  turnstileToken: string;
 }
 
 @Injectable({
