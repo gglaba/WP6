@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: clamp(540px, 72vh, 760px);
+  min-height: clamp(560px, 86vh, 860px);
   overflow: hidden;
   background: #293b33;
 }
@@ -17,7 +17,7 @@
 
 .property-hero-video {
   object-fit: cover;
-  object-position: center 56%;
+  object-position: 30% 38%;
 }
 
 .property-hero-shade {
@@ -130,22 +130,31 @@
 
 @media (max-width: 640px) {
   .property-hero {
-    min-height: min(680px, calc(100svh - 72px));
+    min-height: calc(100svh - 72px);
+    max-height: 760px;
   }
 
   .property-hero-video {
-    object-position: 58% center;
+    object-position: 34% center;
   }
 
   .property-hero-shade {
     background:
-      linear-gradient(90deg, rgb(22 34 29 / 76%), rgb(22 34 29 / 28%)),
-      linear-gradient(0deg, rgb(22 34 29 / 34%), transparent 60%);
+      linear-gradient(0deg, rgb(22 34 29 / 88%) 0%, rgb(22 34 29 / 55%) 55%, rgb(22 34 29 / 25%) 100%);
   }
 
   .property-hero-content {
     width: min(100% - 2rem, 1240px);
-    padding: 4rem 0;
+    padding: 3rem 0 2.5rem;
+    align-self: flex-end;
+  }
+
+  .property-hero {
+    align-items: flex-end;
+  }
+
+  .property-hero-content h1 {
+    font-size: clamp(2.1rem, 10vw, 2.8rem);
   }
 
   .property-hero-location {
@@ -156,7 +165,7 @@
   .property-hero-actions {
     align-items: stretch;
     flex-direction: column;
-    max-width: 320px;
+    max-width: none;
   }
 
   .property-hero-primary,

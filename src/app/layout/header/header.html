@@ -61,29 +61,32 @@
       <ul class="site-mobile-links">
         <li>
           <a routerLink="/" (click)="menuOpen.set(false)"
-             class="site-mobile-link">
+             class="site-mobile-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             Strona główna
           </a>
         </li>
         <li>
           <a routerLink="/rooms" (click)="menuOpen.set(false)"
-             class="site-mobile-link">
+             class="site-mobile-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             Oferta
           </a>
         </li>
         <li>
           <a routerLink="/about" (click)="menuOpen.set(false)"
-             class="site-mobile-link">
+             class="site-mobile-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             O nas
           </a>
         </li>
         <li>
           <a routerLink="/contact" (click)="menuOpen.set(false)"
-             class="site-mobile-link">
+             class="site-mobile-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             Kontakt
           </a>
         </li>
       </ul>
+      <a class="site-mobile-call" href="tel:+48514270784">
+        <i class="pi pi-phone"></i> Zadzwoń: 514 270 784
+      </a>
     </div>
   }
 </nav>
