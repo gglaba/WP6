@@ -16,7 +16,7 @@ interface RoomOption {
   label: string;
   value: number;
   disabled: boolean;
-  isAvailable: boolean;
+  isAvailable?: boolean;
 }
 
 @Component({
@@ -59,7 +59,7 @@ export class Contact implements OnInit {
   ngOnInit(): void {
     this.roomsService.getRooms().subscribe((rooms) => {
       this.roomOptions = rooms.map((r) => ({
-        label: r.isAvailable ? r.name : `${r.name} (zajęte)`,
+        label: r.isAvailable === false ? `${r.name} (zajęte)` : r.name,
         value: r.id,
         disabled: false,
         isAvailable: r.isAvailable
@@ -92,7 +92,7 @@ export class Contact implements OnInit {
 
   get hasUnavailableSelected(): boolean {
     return this.form.selectedRooms.some((id) =>
-      this.roomOptions.find((o) => o.value === id && !o.isAvailable)
+      this.roomOptions.find((o) => o.value === id && o.isAvailable === false)
     );
   }
 

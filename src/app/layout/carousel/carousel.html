@@ -1,62 +1,31 @@
-<!-- <section class="relative w-full h-screen overflow-hidden"> -->
-<section class="relative w-full overflow-hidden h-[60vh] md:h-[75vh] lg:h-screen">
-  <!-- Video background -->
-<video
-  #videoEl
-  class="absolute inset-0 w-full h-full object-cover"
-  autoplay muted loop playsinline>
-</video>
-
-  <!-- Dark overlay -->
-  <div class="absolute inset-0 bg-black/50"></div>
-
-  <!-- Slides -->
-  <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
-    @for (slide of slides; track $index) {
-      @if ($index === currentIndex()) {
-        <div class="slide-in flex flex-col items-center gap-4 max-w-3xl">
-          <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
-            {{ slide.heading }}
-          </h1>
-          <p class="text-lg md:text-xl text-white/80">
-            {{ slide.subheading }}
-          </p>
-<a [routerLink]="slide.ctaLink"
-   class="mt-4 px-8 py-3 bg-white text-gray-900 font-medium rounded-full
-          hover:bg-gray-100 transition-colors">
-  {{ slide.ctaLabel }}
-</a>
-        </div>
-      }
-    }
+<section class="property-hero">
+  <video
+    #videoEl
+    class="property-hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="/assets/photos/zewnatrz/20260604_124746.jpg"
+    aria-hidden="true">
+  </video>
+  <div class="property-hero-shade"></div>
+  <div class="property-hero-content">
+    <p class="property-hero-location">
+      <i class="pi pi-map-marker"></i>
+      Wojska Polskiego 6 · Bystrzyca Kłodzka
+    </p>
+    <h1>Lokale użytkowe<br /><span>z historią i potencjałem</span></h1>
+    <p class="property-hero-description">
+      Przestrzeń dla Twojej firmy w odrestaurowanej willi w centrum miasta.
+    </p>
+    <div class="property-hero-actions">
+      <a routerLink="/rooms" class="property-hero-primary">
+        Zobacz lokale <i class="pi pi-arrow-right"></i>
+      </a>
+      <a routerLink="/about" class="property-hero-secondary">
+        Poznaj budynek
+      </a>
+    </div>
   </div>
-
-  <!-- Arrows -->
-  <button
-    (click)="prev()"
-    class="absolute left-4 top-1/2 -translate-y-1/2 z-10
-           w-10 h-10 flex items-center justify-center
-           bg-white/20 hover:bg-white/40 text-white rounded-full transition-colors">
-    ‹
-  </button>
-  <button
-    (click)="next()"
-    class="absolute right-4 top-1/2 -translate-y-1/2 z-10
-           w-10 h-10 flex items-center justify-center
-           bg-white/20 hover:bg-white/40 text-white rounded-full transition-colors">
-    ›
-  </button>
-
-  <!-- Dots -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-3">
-    @for (slide of slides; track $index) {
-      <button
-        (click)="goTo($index)"
-        class="w-2.5 h-2.5 rounded-full transition-colors"
-        [class.bg-white]="$index === currentIndex()"
-        [class.bg-white/40]="$index !== currentIndex()">
-      </button>
-    }
-  </div>
-
 </section>

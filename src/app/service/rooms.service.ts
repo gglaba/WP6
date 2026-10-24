@@ -6,9 +6,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 export interface Room {
   id: number;
   name: string;
-  size: number;
-  price: number;
-  isAvailable: boolean;
+  size?: number;
+  price?: number;
+  isAvailable?: boolean;
   description: string;
   photosUrls: string[];
 }

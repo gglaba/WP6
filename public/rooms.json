@@ -1,11 +1,8 @@
 [
   {
     "id": 1,
-    "name": "Pokój Standardowy",
-    "size": 20,
-    "price": 150,
-    "isAvailable": true,
-    "description": "Przytulny pokój z widokiem na ogród.",
+    "name": "Lokal użytkowy 1",
+    "description": "Szczegółowe informacje o lokalu i warunkach najmu uzyskasz w kontakcie.",
     "photosUrls": [
       "https://pub-26b90437752f4ce5b39ef498c36945a0.r2.dev/photos/20190822_100738.jpg",
       "https://pub-26b90437752f4ce5b39ef498c36945a0.r2.dev/photos/20190822_100700.jpg"
@@ -13,11 +10,8 @@
   },
   {
     "id": 2,
-    "name": "Pokój Deluxe",
-    "size": 35,
-    "price": 280,
-    "isAvailable": false,
-    "description": "Przestronny pokój z balkonem i wanną.",
+    "name": "Lokal użytkowy 2",
+    "description": "Szczegółowe informacje o lokalu i warunkach najmu uzyskasz w kontakcie.",
     "photosUrls": [
       "https://pub-26b90437752f4ce5b39ef498c36945a0.r2.dev/photos/20190822_100901.jpg",
       "https://pub-26b90437752f4ce5b39ef498c36945a0.r2.dev/photos/20190822_100837.jpg"

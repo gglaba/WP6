@@ -6,9 +6,9 @@
     <div class="hs-header anim-blur" #animEl>
       <div class="hs-header-text">
         <span class="hs-eyebrow">oferta</span>
-        <h2 class="hs-title">Dostępne pomieszczenia</h2>
+        <h2 class="hs-title">Lokale użytkowe na wynajem</h2>
         <p class="hs-subtitle">
-          Lokale użytkowe w zabytkowej willi w centrum Bystrzycy Kłodzkiej.
+          Sprawdź dostępność i poznaj przestrzenie w zabytkowej willi przy Wojska Polskiego 6.
         </p>
       </div>
       <a routerLink="/rooms" class="hs-link-btn">
@@ -19,7 +19,7 @@
     <div class="hs-rooms-grid">
       <div
         *ngFor="let room of rooms; let i = index"
-        class="hs-room-card anim-flip"
+        class="hs-room-card anim-fade-up"
         #animEl
         [style.transition-delay]="i * 120 + 'ms'"
         [routerLink]="['/rooms', room.id]"
@@ -27,17 +27,17 @@
         <div class="hs-room-img">
           <img *ngIf="room.photosUrls.length" [src]="room.photosUrls[0]" [alt]="room.name" />
           <i *ngIf="!room.photosUrls.length" class="pi pi-building"></i>
-          <span class="hs-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
+          <span *ngIf="room.isAvailable !== undefined" class="hs-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
             {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
           </span>
         </div>
         <div class="hs-room-body">
           <div class="hs-room-name">{{ room.name }}</div>
           <div class="hs-room-meta">
-            <span><i class="pi pi-expand"></i> {{ room.size }} m²</span>
+            <span *ngIf="room.size !== undefined"><i class="pi pi-expand"></i> {{ room.size }} m²</span>
           </div>
           <div class="hs-room-footer">
-            <span class="hs-room-price">{{ room.price }} zł <small>/ miesiąc</small></span>
+            <span *ngIf="room.price !== undefined" class="hs-room-price">{{ room.price }} zł <small>/ miesiąc brutto</small></span>
             <span class="hs-room-more">Szczegóły <i class="pi pi-arrow-right"></i></span>
           </div>
         </div>
@@ -51,10 +51,29 @@
   <div class="hs-wrap">
     <div class="hs-about-grid">
       <div class="hs-about-img anim-slide-left" #animEl>
-        <img [src]="aboutPhoto" alt="Budynek WP6" />
+        <img
+          [src]="aboutPhoto"
+          width="4000"
+          height="1848"
+          loading="lazy"
+          decoding="async"
+          alt="Odrestaurowana willa przy ul. Wojska Polskiego 6 w Bystrzycy Kłodzkiej"
+        />
         <div class="hs-about-img-label">
           <i class="pi pi-clock"></i> Budynek z historią sięgającą XIX wieku
         </div>
+        <figure class="hs-about-archive">
+          <img
+            [ngSrc]="historyPhoto"
+            width="269"
+            height="318"
+            alt="Archiwalne zdjęcie budynku przy Wojska Polskiego 6 z 1927 roku"
+          />
+          <figcaption>
+            <span>W archiwum</span>
+            <strong>1927</strong>
+          </figcaption>
+        </figure>
       </div>
       <div class="hs-about-text anim-blur" #animEl>
         <span class="hs-eyebrow">o nas</span>
