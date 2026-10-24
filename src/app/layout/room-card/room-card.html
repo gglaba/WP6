@@ -1,15 +1,22 @@
 <div class="rv-wrap">
-
   <div class="rv-header">
     <div class="rv-header-left">
       <span class="rv-eyebrow">oferta</span>
-      <span class="rv-title">Dostępne pomieszczenia</span>
+      <h2 class="rv-title">Lokale w ofercie</h2>
     </div>
-    <div class="rv-toggle">
-      <button class="rv-toggle-btn" [class.active]="layout === 'grid'" (click)="layout = 'grid'" aria-label="Widok siatki">
+    <div class="rv-toggle" aria-label="Układ oferty">
+      <button
+        class="rv-toggle-btn"
+        [class.active]="layout === 'grid'"
+        (click)="layout = 'grid'"
+        aria-label="Widok siatki">
         <i class="pi pi-table"></i>
       </button>
-      <button class="rv-toggle-btn" [class.active]="layout === 'list'" (click)="layout = 'list'" aria-label="Widok listy">
+      <button
+        class="rv-toggle-btn"
+        [class.active]="layout === 'list'"
+        (click)="layout = 'list'"
+        aria-label="Widok listy">
         <i class="pi pi-bars"></i>
       </button>
     </div>
@@ -17,14 +24,13 @@
 
   <div class="rv-info-msg">
     <i class="pi pi-info-circle"></i>
-    Podane ceny są orientacyjne i podlegają negocjacji
+    Ceny podajemy jako miesięczne kwoty brutto.
   </div>
 
-  <p-dataview [value]="(rooms) ?? []" [layout]="layout">
-
+  <p-dataview [value]="rooms" [layout]="layout">
     <ng-template #grid let-items>
       <div class="rv-grid">
-        <div *ngFor="let room of items" class="rv-card" [routerLink]="['/rooms', room.id]">
+        <a *ngFor="let room of items" class="rv-card" [routerLink]="['/rooms', room.id]">
           <div class="rv-img">
             <img
               *ngIf="room.photosUrls?.length"
@@ -34,30 +40,28 @@
               (error)="onImgError($event)"
             />
             <i *ngIf="!room.photosUrls?.length" class="pi pi-building"></i>
-            <span class="rv-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
+            <span *ngIf="room.isAvailable !== undefined" class="rv-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
               {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
             </span>
           </div>
           <div class="rv-body">
-            <div class="rv-name">{{ room.name }}</div>
-            <div class="rv-desc">{{ room.description }}</div>
-            <div class="rv-meta">
-              <i class="pi pi-expand"></i>{{ room.size }} m²
-            </div>
+            <h3 class="rv-name">{{ room.name }}</h3>
+            <p class="rv-desc">{{ room.description }}</p>
+            <div *ngIf="room.size !== undefined" class="rv-meta"><i class="pi pi-expand"></i>{{ room.size }} m²</div>
             <div class="rv-footer">
-              <span class="rv-price" *ngIf="room.isAvailable">
-                {{ room.price }} zł <small>/mies.</small>
+              <span *ngIf="room.price !== undefined" class="rv-price">
+                {{ room.price }} zł <small>/mies. brutto</small>
               </span>
-              <button class="rv-btn">Zobacz więcej</button>
+              <span class="rv-btn">Zobacz więcej</span>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </ng-template>
 
     <ng-template #list let-items>
       <div class="rv-list">
-        <div *ngFor="let room of items" class="rv-list-item" [routerLink]="['/rooms', room.id]">
+        <a *ngFor="let room of items" class="rv-list-item" [routerLink]="['/rooms', room.id]">
           <div class="rv-thumb">
             <img
               *ngIf="room.photosUrls?.length"
@@ -69,24 +73,21 @@
             <i *ngIf="!room.photosUrls?.length" class="pi pi-building"></i>
           </div>
           <div class="rv-info">
-            <div class="rv-name">{{ room.name }}</div>
-            <div class="rv-desc">{{ room.description }}</div>
-            <div class="rv-meta">
-              <i class="pi pi-expand"></i>{{ room.size }} m²
-            </div>
+            <h3 class="rv-name">{{ room.name }}</h3>
+            <p class="rv-desc">{{ room.description }}</p>
+            <div *ngIf="room.size !== undefined" class="rv-meta"><i class="pi pi-expand"></i>{{ room.size }} m²</div>
           </div>
           <div class="rv-right">
-            <span class="rv-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
+            <span *ngIf="room.isAvailable !== undefined" class="rv-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
               {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
             </span>
-            <span *ngIf="room.isAvailable" class="rv-price">
-              {{ room.price }} zł <small>/mies.</small>
+            <span *ngIf="room.price !== undefined" class="rv-price">
+              {{ room.price }} zł <small>/mies. brutto</small>
             </span>
-            <button class="rv-btn">Zobacz więcej</button>
+            <span class="rv-btn">Zobacz więcej</span>
           </div>
-        </div>
+        </a>
       </div>
     </ng-template>
-
   </p-dataview>
 </div>

@@ -2,3 +2,67 @@
 
 @import 'tailwindcss';
 @import 'primeicons/primeicons.css';
+
+:root {
+  --brand-ink: #252a27;
+  --brand-green: #315548;
+  --brand-green-dark: #243f35;
+  --brand-brass: #a47c4d;
+  --brand-paper: #f7f6f2;
+  --brand-surface: #fff;
+  --brand-border: #e6e3dc;
+  --brand-muted: #6d716d;
+  --brand-shadow: 0 18px 48px rgb(37 42 39 / 8%);
+  --brand-radius-control: 999px;
+  --brand-radius-control-small: 12px;
+
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--brand-paper);
+}
+
+body {
+  margin: 0;
+  background: var(--brand-paper);
+  color: var(--brand-ink);
+  font-family: Inter, 'DM Sans', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:not([class]),
+button:not([class]) {
+  border-radius: var(--brand-radius-control);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(164 124 77 / 55%);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #d7e3d9;
+  color: var(--brand-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

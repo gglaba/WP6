@@ -15,7 +15,7 @@
         <button class="rd-arrow rd-arrow-right" (click)="nextPhoto()" aria-label="Następne">
           <i class="pi pi-chevron-right"></i>
         </button>
-        <div class="rd-badge-wrap">
+        <div *ngIf="room.isAvailable !== undefined" class="rd-badge-wrap">
           <span class="rd-badge" [class.avail]="room.isAvailable" [class.taken]="!room.isAvailable">
             {{ room.isAvailable ? 'Dostępne' : 'Zajęte' }}
           </span>
@@ -44,19 +44,19 @@
     </div>
 
     <div class="rd-info">
-      <div class="rd-eyebrow">pomieszczenie</div>
+      <div class="rd-eyebrow">lokal użytkowy</div>
       <h1 class="rd-title">{{ room.name }}</h1>
       <p class="rd-desc">{{ room.description }}</p>
 
-      <div class="rd-specs">
-        <div class="rd-spec">
+      <div *ngIf="room.size !== undefined || room.price !== undefined" class="rd-specs">
+        <div *ngIf="room.size !== undefined" class="rd-spec">
           <i class="pi pi-expand"></i>
           <span>{{ room.size }} m²</span>
         </div>
-        <div class="rd-divider"></div>
-        <div class="rd-spec">
+        <div *ngIf="room.size !== undefined && room.price !== undefined" class="rd-divider"></div>
+        <div *ngIf="room.price !== undefined" class="rd-spec">
           <i class="pi pi-tag"></i>
-          <span>{{ room.price }} zł / miesiąc</span>
+          <span>{{ room.price }} zł / miesiąc brutto</span>
         </div>
       </div>
 

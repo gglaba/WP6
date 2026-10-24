@@ -72,14 +72,14 @@
             placeholder="Zapytanie o wynajem" required />
         </div>
         <div class="ct-field">
-        <label>Pomieszczenia</label>
+        <label>Lokale użytkowe</label>
         <p-multiselect
             [options]="roomOptions"
             [(ngModel)]="form.selectedRooms"
             name="rooms"
             optionLabel="label"
             optionValue="value"
-            placeholder="Wybierz pomieszczenia..."
+            placeholder="Wybierz lokale..."
             display="chip"
             [filter]="false"
             [showClear]="true"
@@ -89,7 +89,7 @@
         </div>
             <div class="ct-warning" *ngIf="hasUnavailableSelected">
     <i class="pi pi-exclamation-triangle"></i>
-    Wybrano wynajęte pomieszczenia, które mogą być niedostępne długoterminowo - mimo to możesz wysłać zapytanie, a my skontaktujemy się z Tobą, aby omówić szczegóły.
+    Wybrano zajęte lokale, które mogą być niedostępne do wynajęcia - mimo to możesz wysłać zapytanie, a my skontaktujemy się z Tobą, aby omówić szczegóły.
     </div>
         <div class="ct-field">
           <label for="message">Wiadomość</label>
@@ -160,28 +160,29 @@
       <!-- dane firmy -->
       <div class="ct-info">
         <div class="ct-info-title">Dane firmy </div>
-        <div class="ct-info-name">Zakład Kosmetyczno-Fryzjerski Bogdan Głąba</div>
+        <div class="ct-info-name">WP6 — lokale użytkowe</div>
+        <div class="ct-info-legal">Zakład Kosmetyczno-Fryzjerski Bogdan Głąba</div>
         <div class="ct-info-nip">NIP: 881-106-05-37</div>
 
         <div class="ct-contacts">
           <div class="ct-contact-row">
             <div class="ct-contact-icon"><i class="pi pi-map-marker"></i></div>
             <div>
-              <div>ul. Stefana Okrzei 1</div>
+              <div>ul. Wojska Polskiego 6</div>
               <div class="ct-contact-label">57-500 Bystrzyca Kłodzka</div>
             </div>
           </div>
           <div class="ct-contact-row">
             <div class="ct-contact-icon"><i class="pi pi-phone"></i></div>
             <div>
-              <div>+48 514 270 784</div>
+              <a class="ct-contact-link" href="tel:+48514270784">+48 514 270 784</a>
               <div class="ct-contact-label">Pn–Pt, 9:00–17:00</div>
             </div>
           </div>
           <div class="ct-contact-row">
             <div class="ct-contact-icon"><i class="pi pi-envelope"></i></div>
             <div>
-              <div>biura.bystrzyca@gmail.com</div>
+              <a class="ct-contact-link" href="mailto:biura.bystrzyca@gmail.com">biura.bystrzyca&#64;gmail.com</a>
               <div class="ct-contact-label">Odpowiadamy w ciągu 24h</div>
             </div>
           </div>

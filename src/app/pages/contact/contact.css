@@ -289,8 +289,6 @@
   color: var(--p-text-muted-color);
 }
 
-
-
 /* mobile */
 
 @media (max-width: 768px) {
@@ -300,3 +298,122 @@
   }
 }
 
+.ct-wrap {
+  max-width: 1240px;
+  padding: clamp(3rem, 6vw, 5rem) 1.5rem;
+}
+
+.ct-eyebrow {
+  color: var(--brand-brass);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.ct-title {
+  margin-top: 0;
+  color: var(--brand-ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.ct-card,
+.ct-info {
+  border: 1px solid var(--brand-border);
+  border-radius: 3px;
+  background: var(--brand-surface);
+}
+
+.ct-card {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.ct-card-title,
+.ct-info-title {
+  border-bottom-color: var(--brand-border);
+  color: var(--brand-ink);
+}
+
+.ct-field label {
+  color: var(--brand-ink);
+  font-weight: 500;
+}
+
+.ct-field input,
+.ct-field textarea {
+  border-color: var(--brand-border);
+  border-radius: 2px;
+  background: #fbfaf8;
+}
+
+.ct-field input:focus,
+.ct-field textarea:focus {
+  border-color: var(--brand-green);
+  box-shadow: 0 0 0 3px rgb(49 85 72 / 10%);
+}
+
+.ct-btn,
+.ct-btn-sm {
+  border-radius: var(--brand-radius-control);
+  background: var(--brand-green);
+}
+
+.ct-btn:hover:not(:disabled),
+.ct-btn-sm:hover {
+  background: var(--brand-green-dark);
+}
+
+.ct-map,
+.ct-map-blocked {
+  border-radius: 3px;
+}
+
+.ct-contact-icon {
+  border-radius: 2px;
+  background: #eeece5;
+}
+
+.ct-contact-icon .pi,
+.ct-rodo-link {
+  color: var(--brand-green);
+}
+
+.ct-info-legal {
+  margin: 0 0 4px;
+  color: var(--brand-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ct-contact-link {
+  color: var(--brand-ink);
+  text-decoration: none;
+}
+
+.ct-contact-link:hover {
+  color: var(--brand-green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+::ng-deep .ct-multiselect {
+  border-color: var(--brand-border);
+  border-radius: 2px;
+  background: #fbfaf8;
+}
+
+.ct-btn {
+  min-height: 48px;
+}
+
+.ct-btn-sm {
+  min-height: 40px;
+  padding-inline: 18px;
+}
+
+@media (max-width: 768px) {
+  .ct-wrap {
+    padding: 2.5rem 1rem 3.5rem;
+  }
+}
